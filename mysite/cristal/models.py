@@ -8,7 +8,7 @@ class Cliente(models.Model):
     email = models.EmailField(max_length=100)
     cpf = CPFField(masked=False, blank=True)
     cnpj = CNPJField(masked=False, blank=True)
-    data_cadastro = models.DateTimeField("Data Cadastro")
+    #data_cadastro = models.DateTimeField("Data Cadastro", blank=True)
 
     def __str__(self):
         return self.nome
