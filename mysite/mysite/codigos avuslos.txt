@@ -1,0 +1,64 @@
+
+# class IndexView(generic.ListView):
+# 	template_name = "cristal/index.html"
+# 	context_object_name = "tarefa"
+#
+# 	def get_queryset(self):
+# 		return TarefaModel.objects.all()
+
+
+
+
+
+# for item in tarefa:
+# boleto = item.boleto
+# nome = item.nome
+# data = item.data_boleto
+# print(boleto,nome,data)
+
+# file_path = os.path.join(settings.BASE_DIR,stripedstring)
+# file_open = open(file_path)
+# print(file_open)
+
+# def upload(request):
+#     if request.method == 'POST' and request.FILES['upload']:
+#         upload = request.FILES['upload']
+#         fss = FileSystemStorage('media/cristal/static/cristal/')
+#         file = fss.save(upload.name, upload)
+#         file_url = fss.url('cristal/static/cristal/' +file)
+#         return render(request, 'cristal/upload.html', {'file_url': file_url})
+#     return render(request, 'cristal/upload.html')
+
+  # converte valor recebido de cpf de string para int
+    cpf = repr(boleto.nome.cpf)
+    x = cpf.strip('.').lstrip('CPF(raw_input=').rstrip(')')
+    cpfstrin = int(x)
+
+    # converte valor recebido de cnpj de string para int
+    cnpj = repr(boleto.nome.cnpj)
+    print(cnpj)
+    pj = cnpj.strip('.').lstrip('CPF(raw_input=').rstrip(')')
+    print (pj)
+
+
+        # reader = PdfReader(ok)
+        # writer = PdfWriter()
+        # for page in reader.pages:
+        #     writer.add_page(page)
+        #     writer.encrypt(cpftostrin)
+        #     with open(ok, "wb") as f:
+        #         writer.write(f)
+
+
+       as_int = int(cnpj)
+        cnpjtostrin = int(cnpj)
+        print(cnpjtostrin)
+        # reader = PdfReader(ok)
+        # writer = PdfWriter()
+        # for page in reader.pages:
+        #     writer.add_page(page)
+        #     writer.encrypt(cnpjtostrin)
+        #     with open(ok, "wb") as f:
+        #         writer.write(f)
+
+

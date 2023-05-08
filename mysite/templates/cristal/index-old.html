@@ -1,0 +1,18 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'cristal/style.css' %}">
+
+{% if ultimos_boletos_lista %}
+    <ul>
+
+    {% for nome in ultimos_boletos_lista %}
+
+                <li><a href="{% url 'cristal:detalhes' nome.id %}">{{ nome.nome }} </a></li>
+
+    {% endfor %}
+
+    </ul>
+
+
+{% else %}
+<p>Sem tarefas disponíveis</p>
+{% endif %}

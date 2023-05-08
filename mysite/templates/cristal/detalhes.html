@@ -1,0 +1,13 @@
+{% csrf_token %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'cristal/style.css' %}">
+
+
+
+                <li>Cliente: {{ ultimas_tarefas.nome }} </li> <br>
+                <li>Ref. Boleto {{ ultimas_tarefas.mes }} </li> <br>
+                <li>Data de Envio: {{ ultimas_tarefas.data_boleto }} </li> <br>
+                <li>Arquivo Enviado {{ ultimas_tarefas.boleto }} </li> <br>
+
+
+
