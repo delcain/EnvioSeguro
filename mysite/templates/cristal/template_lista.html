@@ -1,0 +1,17 @@
+{% extends 'cristal/base.html' %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+{% block title %} Lista Templates {% endblock %}<br>
+
+
+{% for f in form  %}
+
+<a href="/template/editar/{{f.id}}">{{f.nome}}<br>
+
+{% endfor %}
+
+
+{% endblock %}

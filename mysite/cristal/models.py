@@ -1,8 +1,7 @@
 from django_cpf_cnpj.fields import CPFField, CNPJField
+from django.contrib.auth import get_user_model
 from ckeditor.fields import RichTextField
-from django.utils import timezone
 from django.db import models
-import datetime
 
 class Cliente(models.Model):
     nome = models.CharField(max_length=200)

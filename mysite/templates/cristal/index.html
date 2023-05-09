@@ -8,14 +8,29 @@
 
 
 
+<ul class="sidebar-nav">
 
+    ...
+
+   {% if user.is_authenticated %}
+     <li>User: {{ user.get_username }}</li>
+     <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+   {% else %}
+     <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+   {% endif %}
+  </ul>
 
 
 <div class="col-2 add-div offset-1 col-10 list-div">
     <p><a href="{% url 'cristal:cadastro_cliente' %}"><i class="fas fa-plus"></i> Cliente Cadastro</a>
     <p><a href="{% url 'cristal:clientes_listar' %}"><i class="fas fa-plus"></i> Cliente Listar </a></p>
-    <p><a href="{% url 'cristal:upload' %}"> <i class="fas fa-plus"></i> Tarefas Cadastro </a></p>
-    <p><a href="{% url 'cristal:tarefa_listar' %}"><i class="fas fa-plus"></i>  Listar Tarefas </a></p>
+
+    <p><a href="{% url 'cristal:tarefas_listar' %}"><i class="fas fa-plus"></i> Tarefas Listar </a></p>
+    <p><a href="{% url 'cristal:tarefas_novo' %}"> <i class="fas fa-plus"></i> Tarefas Cadastro </a></p>
+
+
+    <p><a href="{% url 'cristal:template_listar' %}"><i class="fas fa-plus"></i>  Templates Listar </a></p>
+    <p><a href="{% url 'cristal:template_novo' %}"><i class="fas fa-plus"></i>  Templates Novo </a></p>
 </div>
 
 {% endblock %}

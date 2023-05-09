@@ -1,7 +1,8 @@
 {% extends 'cristal/base.html' %}
+
 {% load crispy_forms_tags %}
 
-{% block title %} Cadastro de template {%endblock%}
+{% block title %} {{task.title}} {% endblock %}
 
 {% block content %}
 <form method="POST">
@@ -14,16 +15,10 @@
         </div>
         <br>
         <div class="form-group">
-            <label><font class ="label">Modelo</font></label>
+            <label>Modelo</label><br>
+            <label><font class ="label"></font></label>
             {{ form.email_template }}
         </div>
-
-
-        <input type="submit" class="btn btn-success" value="Cadastrar Template">
+        <input type="submit" class="btn btn-success" value="Salvar Template">
 </form>
-
-
-
-
 {% endblock %}
-

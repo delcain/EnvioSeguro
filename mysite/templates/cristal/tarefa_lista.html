@@ -8,7 +8,7 @@
 
 <h2>Tarefas</h2>
     {% for t in tarefas %}
-        <a href="/media/{{t.boleto}}"> {{ t.nome }}, {{t.mes}}, {{t.data_boleto}}</a><br>
+        <a href="/media/{{t.boleto}}"> Nome: {{ t.nome }}, Mes {{t.mes}}, Data Envio {{t.data_boleto}}</a><br>
     {% empty %}
 
 <p>Tarefa não foi criada.</p>
