@@ -1,0 +1,28 @@
+{% extends 'cristal/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Cadastro de template {%endblock%}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+{{ form.media }}
+<div class="form-group">
+    <label><font class ="label">Titulo</font></label><br>
+    {{ form.nome }}
+</div>
+<br>
+<div class="form-group">
+    <label><font class ="label">Modelo</font></label>
+    {{ form.email_template }}
+</div>
+
+
+<input type="submit" class="btn btn-success" value="Cadastrar Template">
+</form>
+
+
+
+
+{% endblock %}
+

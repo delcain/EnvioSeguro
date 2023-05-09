@@ -1,17 +1,25 @@
-import datetime
 from django_cpf_cnpj.fields import CPFField, CNPJField
-from django.db import models
+from ckeditor.fields import RichTextField
 from django.utils import timezone
+from django.db import models
+import datetime
 
 class Cliente(models.Model):
     nome = models.CharField(max_length=200)
     email = models.EmailField(max_length=100)
     cpf = CPFField(masked=False, blank=True)
     cnpj = CNPJField(masked=False, blank=True)
-    #data_cadastro = models.DateTimeField("Data Cadastro", blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.nome
+
+class EmailModel(models.Model):
+    nome = models.CharField(max_length=10)
+    email_template = RichTextField(blank=True, null=True)
+    def __str__(self):
+      return self.nome
 
 class TarefaModel(models.Model):
     objects = None
@@ -35,6 +43,7 @@ class TarefaModel(models.Model):
     nome = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     boleto = models.FileField(upload_to='cristal/static/cristal/', default='null')
     status_entrega = models.CharField(max_length=100, blank=True)
+    email_template = models.ForeignKey(EmailModel, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return str(self.nome)

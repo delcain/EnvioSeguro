@@ -1,27 +1,56 @@
-from django.forms import DateTimeField
-from django.shortcuts import render, redirect
-from django.views import generic
-from django.http import HttpResponse
-from .models import TarefaModel, Cliente
-from .forms import TarefaForm, CadastroClienteForm
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import TarefaForm, ClienteForm, EmailForm
+from .models import TarefaModel, Cliente, EmailModel
 from PyPDF2 import PdfWriter, PdfReader
-import datetime
-from django.utils import timezone
+from django.views import generic
 from django.conf import settings
 from django.core.mail import EmailMessage
 import os
+
+
 def index(request):
     return render(request, 'cristal/index.html')
 
-def cliente_cadastro(request):
+def email(request):
     if request.method == 'POST':
-        form = CadastroClienteForm(request.POST)
+        form = EmailForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('/')
     else:
-        form = CadastroClienteForm()
-        return render(request, 'cristal/addtask.html', {'form': form})
+        form = EmailForm()
+        return render(request, 'cristal/cadastro_template.html', {'form': form})
+
+def cliente_cadastro(request):
+    if request.method == 'POST':
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    else:
+        form = ClienteForm()
+        return render(request, 'cristal/cadastro_cliente.html', {'form': form})
+
+def cliente_lista(request):
+    cliente = Cliente.objects.all()
+    return render(request=request, template_name="cristal/cliente_lista.html", context={'cliente' :cliente})
+
+def cliente_editar(request, id):
+    cliente = get_object_or_404(Cliente, pk=id)
+    form = ClienteForm(instance=cliente)
+
+    if(request.method == 'POST'):
+        form = ClienteForm(request.POST, instance=cliente)
+
+        if(form.is_valid()):
+            cliente.save()
+            return redirect('/')
+        else:
+            return render(request, 'cristal/editacliente.html', {'form': form, 'cliente': cliente})
+    else:
+        return render(request, 'cristal/editacliente.html', {'form': form, 'cliente': cliente})
+
+
 
 def upload(request):
     if request.method == "POST":
@@ -29,11 +58,9 @@ def upload(request):
         if form.is_valid():
             form.save()
             encripta()
-            return redirect("cristal:upload")
+            return redirect("cristal:tarefa_listar")
     form = TarefaForm()
     tarefa = TarefaModel.objects.all()
-    # boleto = TarefaModel.objects.all().last()
-    # print(boleto.boleto, boleto.nome.cpf, boleto.nome.cnpj)
     return render(request=request, template_name="cristal/upload.html", context={'form': form, 'tarefa': tarefa})
 
 def encripta():
@@ -86,7 +113,11 @@ def encripta():
 #     def get_queryset(self):
 #         return TarefaModel.objects.order_by("-data_boleto")[:100]
 
-class DetailView(generic.DetailView):
-    template_name = "cristal/detalhes.html"
-    context_object_name = "ultimas_tarefas"
-    model = TarefaModel
+# class DetailView(generic.DetailView):
+#     template_name = "cristal/detalhes.html"
+#     context_object_name = "tarefas_listar"
+#     model = TarefaModel
+
+def tarefas_listar(request):
+    tarefas = TarefaModel.objects.all()
+    return render(request=request, template_name="cristal/tarefa_lista.html", context={'tarefas': tarefas})

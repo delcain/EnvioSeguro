@@ -13,13 +13,5 @@
     </form>
 
 
-<h2>Tarefas</h2>
-    {% for t in tarefa %}
-        <a href="/media/{{t.boleto}}"> {{ t.nome }}</a><br>
-    {% empty %}
-
-<p>Tarefa não foi criada.</p>
-    {% endfor %}
-
 
 {% endblock %}
