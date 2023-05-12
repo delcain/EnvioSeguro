@@ -4,7 +4,7 @@ from .models import TarefaModel, Cliente, EmailModel
 class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
-        fields = ('nome', 'email', 'cpf', 'cnpj',)
+        fields = ('nome', 'email', 'cpf', 'cnpj', )
 
 class TarefaForm(forms.ModelForm):
     class Meta:

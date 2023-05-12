@@ -10,15 +10,14 @@ class Cliente(models.Model):
     cnpj = CNPJField(masked=False, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
     def __str__(self):
         return self.nome
 
 class EmailModel(models.Model):
     nome = models.CharField(max_length=10)
     email_template = RichTextField(blank=True, null=True)
-
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
       return self.nome
@@ -46,7 +45,7 @@ class TarefaModel(models.Model):
     boleto = models.FileField(upload_to='cristal/static/cristal/', default='null')
     status_entrega = models.CharField(max_length=100, blank=True)
     email_template = models.ForeignKey(EmailModel, on_delete=models.CASCADE, blank=True, null=True)
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
         return str(self.nome)

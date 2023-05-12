@@ -2,16 +2,14 @@
 
 {% block content %}
 
-{% load crispy_forms_tags %}
+<div class="container">
 
-{% block title %} Lista Templates {% endblock %}<br>
+    {% for f in form  %}
 
+    <a href="/template/editar/{{f.id}}">{{f.nome}}</a><br>
 
-{% for f in form  %}
+    {% endfor %}
 
-<a href="/template/editar/{{f.id}}">{{f.nome}}<br>
-
-{% endfor %}
-
+</div>
 
 {% endblock %}

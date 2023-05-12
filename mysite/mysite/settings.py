@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'django_wysiwyg',
 ]
+DJANGO_WYSIWYG_FLAVOR = "ckeditor"
 
 SITE_ID = 1
 

@@ -7,6 +7,7 @@ from django.conf import settings
 from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
+from django.contrib.auth.models import User
 import os
 
 @login_required
@@ -15,18 +16,20 @@ def index(request):
 
 @login_required
 def template_email_novo(request):
+    form = EmailForm(request.POST)
     if request.method == 'POST':
-        form = EmailForm(request.POST)
         if form.is_valid():
-            form.save()
+            usuario = form.save(commit=False)
+            usuario.usuario = request.user
+            usuario.save()
             return redirect('/')
     else:
         form = EmailForm()
-        return render(request, 'cristal/cadastro_template.html', {'form': form})
+        return render(request, 'cristal/template_novo.html', {'form': form})
 
 @login_required
 def template_mail_listar(request):
-    form = EmailModel.objects.all()
+    form = EmailModel.objects.filter(usuario=request.user)
     return render(request=request, template_name="cristal/template_lista.html", context={'form': form})
 
 @login_required
@@ -48,7 +51,10 @@ def cliente_cadastro(request):
     if request.method == 'POST':
         form = ClienteForm(request.POST)
         if form.is_valid():
-            form.save()
+            #form.save()
+            usuario = form.save(commit=False)
+            usuario.usuario = request.user
+            usuario.save()
             return redirect('/')
     else:
         form = ClienteForm()
@@ -56,7 +62,7 @@ def cliente_cadastro(request):
 
 @login_required
 def cliente_lista(request):
-    cliente = Cliente.objects.all()
+    cliente = EmailModel.objects.filter(usuario=request.user)
     return render(request=request, template_name="cristal/cliente_lista.html", context={'cliente' :cliente})
 
 @login_required
@@ -75,7 +81,7 @@ def cliente_editar(request, id):
 
 @login_required
 def tarefas_listar(request):
-    tarefas = TarefaModel.objects.all()
+    tarefas = TarefaModel.objects.filter(usuario=request.user)
     return render(request=request, template_name="cristal/tarefa_lista.html", context={'tarefas': tarefas})
 
 #@login_required
@@ -83,7 +89,10 @@ def tarefas_novo(request):
     if request.method == "POST":
         form = TarefaForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            #form.save()
+            usuario = form.save(commit=False)
+            usuario.usuario = request.user
+            usuario.save()
             encripta()
             return redirect("cristal:index")
     form = TarefaForm()

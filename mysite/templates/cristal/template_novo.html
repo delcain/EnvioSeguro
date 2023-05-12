@@ -1,13 +1,11 @@
 {% extends 'cristal/base.html' %}
 
-{% load crispy_forms_tags %}
-
-{% block title %} {{task.title}} {% endblock %}
+{% block title %} Cadastro de template {%endblock%}
 
 {% block content %}
 <div class="container">
 
-    <h1>Editar de Template</h1>
+    <h1>Cadastro de Template</h1>
 
         <form method="POST"> {% csrf_token %}
 
