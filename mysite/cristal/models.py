@@ -1,5 +1,5 @@
 from django_cpf_cnpj.fields import CPFField, CNPJField
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from django.db import models
 
@@ -11,12 +11,15 @@ class Cliente(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+
     def __str__(self):
         return self.nome
 
 class EmailModel(models.Model):
     nome = models.CharField(max_length=10)
     email_template = RichTextField(blank=True, null=True)
+
+
     def __str__(self):
       return self.nome
 
@@ -43,6 +46,7 @@ class TarefaModel(models.Model):
     boleto = models.FileField(upload_to='cristal/static/cristal/', default='null')
     status_entrega = models.CharField(max_length=100, blank=True)
     email_template = models.ForeignKey(EmailModel, on_delete=models.CASCADE, blank=True, null=True)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.nome)

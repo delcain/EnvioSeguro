@@ -1,4 +1,8 @@
+{% extends "../cristal/base.html" %}
+
 {% block content %}
+
+{{ form|crispy }}
 
   {% if form.errors %}
     <p>Your username and password didn't match. Please try again.</p>

@@ -14,7 +14,6 @@ def index(request):
     return render(request, 'cristal/index.html')
 
 @login_required
-
 def template_email_novo(request):
     if request.method == 'POST':
         form = EmailForm(request.POST)
@@ -26,13 +25,11 @@ def template_email_novo(request):
         return render(request, 'cristal/cadastro_template.html', {'form': form})
 
 @login_required
-
 def template_mail_listar(request):
     form = EmailModel.objects.all()
     return render(request=request, template_name="cristal/template_lista.html", context={'form': form})
 
 @login_required
-
 def template_email_editar(request, id):
     template = get_object_or_404(EmailModel, pk=id)
     form = EmailForm(instance=template)
@@ -47,7 +44,6 @@ def template_email_editar(request, id):
         return render(request, 'cristal/template_mail_editar.html', {'form': form,'template':template})
 
 @login_required
-
 def cliente_cadastro(request):
     if request.method == 'POST':
         form = ClienteForm(request.POST)
@@ -59,13 +55,11 @@ def cliente_cadastro(request):
         return render(request, 'cristal/cadastro_cliente.html', {'form': form})
 
 @login_required
-
 def cliente_lista(request):
     cliente = Cliente.objects.all()
     return render(request=request, template_name="cristal/cliente_lista.html", context={'cliente' :cliente})
 
 @login_required
-
 def cliente_editar(request, id):
     cliente = get_object_or_404(Cliente, pk=id)
     form = ClienteForm(instance=cliente)
@@ -80,13 +74,11 @@ def cliente_editar(request, id):
         return render(request, 'cristal/editacliente.html', {'form': form, 'cliente': cliente})
 
 @login_required
-
 def tarefas_listar(request):
     tarefas = TarefaModel.objects.all()
     return render(request=request, template_name="cristal/tarefa_lista.html", context={'tarefas': tarefas})
 
-@login_required
-
+#@login_required
 def tarefas_novo(request):
     if request.method == "POST":
         form = TarefaForm(request.POST, request.FILES)
@@ -96,8 +88,6 @@ def tarefas_novo(request):
             return redirect("cristal:index")
     form = TarefaForm()
     return render(request=request, template_name="cristal/tarefa_upload.html", context={'form': form})
-
-@login_required
 
 def encripta():
     path = "C:/apps/EnvioSeguro/mysite/media/cristal/static/cristal/"

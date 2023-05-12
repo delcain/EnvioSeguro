@@ -7,12 +7,32 @@
 {% block title %} Cadastro de Tarefa {% endblock %}
 
 <h2>Tarefas</h2>
-    {% for t in tarefas %}
-        <a href="/media/{{t.boleto}}"> Nome: {{ t.nome }}, Mes {{t.mes}}, Data Envio {{t.data_boleto}}</a><br>
-    {% empty %}
 
-<p>Tarefa não foi criada.</p>
-    {% endfor %}
+<div class="listaTarefas">
+       <table>
+            <thead>
+                <tr>
+                    <th>Nome Cliente </th>
+                    <th>Mês Referência </th>
+                    <th>Data e Hora de Envio</th>
+                    <th>Download Boleto </th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for t in tarefas %}
+                <tr>
+                    <td>{{t.nome}}</td>
+                    <td>{{t.mes}}</td>
+                    <td>{{t.data_boleto}}</td>
+                    <td><a href="/media/{{t.boleto}}"><i class="fa fa-download"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+       </table>
+</div>
+
+
 
 
 {% endblock %}
+
