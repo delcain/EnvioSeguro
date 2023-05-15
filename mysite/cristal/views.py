@@ -62,8 +62,8 @@ def cliente_cadastro(request):
 
 @login_required
 def cliente_lista(request):
-    cliente = EmailModel.objects.filter(usuario=request.user)
-    return render(request=request, template_name="cristal/cliente_lista.html", context={'cliente' :cliente})
+    cliente = Cliente.objects.filter(usuario=request.user)
+    return render(request=request, template_name="cristal/cliente_lista.html", context={'cliente': cliente})
 
 @login_required
 def cliente_editar(request, id):
@@ -75,9 +75,9 @@ def cliente_editar(request, id):
             cliente.save()
             return redirect('/')
         else:
-            return render(request, 'cristal/editacliente.html', {'form': form, 'cliente': cliente})
+            return render(request, 'cristal/cliente_editar.html', {'form': form, 'cliente': cliente})
     else:
-        return render(request, 'cristal/editacliente.html', {'form': form, 'cliente': cliente})
+        return render(request, 'cristal/cliente_editar.html', {'form': form, 'cliente': cliente})
 
 @login_required
 def tarefas_listar(request):
