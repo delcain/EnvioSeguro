@@ -6,6 +6,7 @@ from . import views
 app_name = "cristal"
 urlpatterns = [
     path("", views.index, name="index"),
+    path("email/", views.email, name="email"),
     path("home", views.index, name="index"),
     path("tarefas/", views.tarefas_listar, name='tarefas_listar'),
     path("tarefas/upload/", views.tarefas_novo, name="tarefas_novo"),
@@ -18,6 +19,7 @@ urlpatterns = [
     path("template/", views.template_mail_listar, name='template_listar'),
     path("template/novo", views.template_email_novo, name='template_novo'),
     path("template/editar/<int:id>/", views.template_email_editar, name='template_editar'),
+    path('template/apagar/<int:id>/', views.template_email_apagar, name="template_email_apagar"),
 
 
 ]\

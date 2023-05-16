@@ -3,13 +3,28 @@
 {% block content %}
 
 <div class="container">
+    <h1>Listar Templates</h1>
+       <table>
+            <thead>
+                <tr>
+                    <th>Nome </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+             {% for f in form  %}
+                <tr>
+                    <td><a href="/template/editar/{{f.id}}">{{f.nome}}</a></td>
 
-    {% for f in form  %}
-
-    <a href="/template/editar/{{f.id}}">{{f.nome}}</a><br>
-
-    {% endfor %}
-
+                     <td><a href="/template/apagar/{{f.id}}"><i class="fa fa-trash"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+       </table>
 </div>
+
+
+
+
 
 {% endblock %}

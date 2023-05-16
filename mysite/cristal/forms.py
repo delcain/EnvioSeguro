@@ -10,7 +10,7 @@ class TarefaForm(forms.ModelForm):
     class Meta:
         model = TarefaModel
 
-        fields = ('nome', 'mes', 'boleto', 'email_template', )
+        fields = ('nome', 'mes', 'boleto',  )
 
 class EmailForm(forms.ModelForm):
     class Meta:

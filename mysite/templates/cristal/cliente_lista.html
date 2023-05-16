@@ -4,14 +4,16 @@
 
 {% load crispy_forms_tags %}
 
-{% block title %} Lista de Clientes {% endblock %}
-
 
 {% for c in cliente %}<br>
+<div class="container">
 
-<a href="/cliente/editar/{{c.id}}">{{c.nome}}<br>
+    <a class="link-dark" href="/cliente/editar/{{c.id}}"  >{{c.nome}}</a><br>
 
 {% endfor %}
+
+</div>
+
 
 
 {% endblock %}
