@@ -84,7 +84,6 @@ def cliente_cadastro(request):
     if request.method == 'POST':
         form = ClienteForm(request.POST)
         if form.is_valid():
-            #form.save()
             usuario = form.save(commit=False)
             usuario.usuario = request.user
             usuario.save()
@@ -127,6 +126,7 @@ def tarefas_novo(request):
             usuario.save()
             encripta()
             return redirect("cristal:tarefas_listar")
+
     form = TarefaForm()
     return render(request=request, template_name="cristal/tarefa_upload.html", context={'form': form})
 
